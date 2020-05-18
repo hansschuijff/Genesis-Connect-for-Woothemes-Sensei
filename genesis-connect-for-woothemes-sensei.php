@@ -5,7 +5,7 @@
  * Description: Plugin wrapper to easily integrate the Automattic Sensei plugin with the Genesis Framework. This plugin will only work with the Genesis Framework and its child themes.
  * Author:      Christoph Herr
  * Author URI:  https://www.christophherr.com
- * Version:     1.2.0
+ * Version:     1.2.1
  * Text Domain: genesis-connect-for-woothemes-sensei
  * Domain Path: /languages
  * License:     GPL-2.0+
