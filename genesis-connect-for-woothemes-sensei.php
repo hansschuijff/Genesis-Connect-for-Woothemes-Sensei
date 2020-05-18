@@ -35,7 +35,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	wp_die( _e( 'Sorry, you are not allowed to access this page directly.', 'gcfws' ) );
 }
 
-add_action( 'plugins_loaded', 'gcfws_load_textdomain' );
+define( 'GCW_TEMPLATE_DIR', dirname( __FILE__ ) . '/templates' );
+
 /**
  * Load plugin textdomain.
  *
@@ -46,8 +47,8 @@ add_action( 'plugins_loaded', 'gcfws_load_textdomain' );
 function gcfws_load_textdomain() {
 	load_plugin_textdomain( 'genesis-connect-for-woothemes-sensei', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 }
+add_action( 'plugins_loaded', 'gcfws_load_textdomain' );
 
-register_activation_hook( __FILE__, 'gcfws_activation' );
 /**
  * This function runs on plugin activation. It checks to make sure the
  * Genesis Framework and Woothemes Sensei are active. If not, it deactivates the plugin.
@@ -63,9 +64,8 @@ function gcfws_activation() {
 		add_action( 'admin_notices', 'gcfws_admin_notice_message' );
 	}
 }
+register_activation_hook( __FILE__, 'gcfws_activation' );
 
-add_action( 'admin_init', 'gcfws_plugin_deactivate' );
-add_action( 'switch_theme', 'gcfws_plugin_deactivate' );
 /**
  * This function is triggered when the WordPress theme is changed.
  * It checks if the Genesis Framework is active. If not, it deactivates the plugin.
@@ -81,6 +81,8 @@ function gcfws_plugin_deactivate() {
 		add_action( 'admin_notices', 'gcfws_admin_notice_message' );
 	}
 }
+add_action( 'admin_init', 'gcfws_plugin_deactivate' );
+add_action( 'switch_theme', 'gcfws_plugin_deactivate' );
 
 /**
  * Error message if you're not using the Genesis Framework.
@@ -91,9 +93,9 @@ function gcfws_plugin_deactivate() {
  */
 function gcfws_admin_notice_message() {
 	$error = sprintf(
-		// translators: Link to the StudioPress website.
+		// translators: Link to the Studiopress website.
 		__( 'Sorry, you can\'t use the Genesis Connect for Woothemes Sensei Plugin unless the <a href="%s">Genesis Framework</a> is active. The plugin has been deactivated.', 'gcfws' ),
-		'https://www.studiopress.com'
+		'http://www.studiopress.com'
 	);
 
 	printf( '<div class="error"><p>%s</p></div>', $error );
@@ -113,6 +115,7 @@ function gcfws_admin_notice_message() {
 function gcfws_autoloader() {
 	require 'src/sensei-integration/sensei-integration.php';
 	require 'src/site-layout/site-layout.php';
+	require 'src/template-loader.php';
 }
 
 gcfws_autoloader();

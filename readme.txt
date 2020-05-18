@@ -3,19 +3,18 @@
 Contributors: christophherr
 Donate link: https://www.christophherr.com/donate/
 Tags: automattic sensei, sensei, genesis, genesis connect, studiopress, woocommerce sensei
-Requires at least: 4.8
-Tested up to: 5.1
+Requires at least: 4.1
+Tested up to: 4.9
 Stable tag: 1.2.0
-Requires PHP: 5.2.4
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-This plugin integrates the Genesis Framework from StudioPress with the Sensei plugin.
+This plugin integrates the Genesis Framework from Studiopress with the Sensei plugin.
 
 == Description ==
 The plugin expands on the [Sensei Documentation](https://docs.woocommerce.com/document/sensei-and-theme-compatibility/) about adding theme compatibility.
 
-You will need the [Sensei](https://woocommerce.com/products/sensei/) plugin and the [Genesis Framework from StudioPress](https://www.studiopress.com) and/or one of its child themes.
+You will need the [Sensei](https://woocommerce.com/products/sensei/) plugin and the [Genesis Framework from Studiopress](https://www.studiopress.com) and/or one of its child themes.
 
 In other words, if you are not trying to integrate the Sensei plugin with the Genesis Framework and/or one of its child themes, you don't need or want this plugin.
 
@@ -69,6 +68,12 @@ Since version 1.2.0, you can choose the layouts of your courses, lessons, questi
 There are no settings and no settings screen. You would have to change the code directly in the source.
 
 == Changelog ==
+
+= 1.2.1 =
+
+* Disabled forced layouts, since it only partly works and overrules user settings.
+* added custom templates for all sensei pages, so it actually uses the genesis framework (wat it didn't) 
+* insert the sidebar using genesis_get_sidebar(), so it will respect the genesis layout settings
 
 = 1.2.0 =
 
