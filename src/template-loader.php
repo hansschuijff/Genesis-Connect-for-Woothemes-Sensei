@@ -55,9 +55,9 @@ function gcfws_template_loader( $template ) {
 
 	global $wp_query;
 
-	if ( class_exists( 'WC_Embed' ) && WC_Embed::is_embedded_product() ) {
-		return $template;
-	}
+	// if ( class_exists( 'WC_Embed' ) && WC_Embed::is_embedded_product() ) {
+	// 	return $template;
+	// }
 
 	$custom_template = '';
 	if ( is_singular( [ 'course', 'lesson', 'quiz', 'sensei_message' ] ) ) {

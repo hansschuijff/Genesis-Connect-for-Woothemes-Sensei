@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	wp_die( _e( 'Sorry, you are not allowed to access this page directly.', 'gcfws' ) );
 }
 
-define( 'GCW_TEMPLATE_DIR', dirname( __FILE__ ) . '/templates' );
+define( 'GCFWS_TEMPLATE_DIR', dirname( __FILE__ ) . '/templates' );
 
 /**
  * Load plugin textdomain.
