@@ -1,5 +1,5 @@
-# Copyright (C) 2018 Genesis Connect for Woothemes Sensei
-# This file is distributed under the same license as the Genesis Connect for Woothemes Sensei package.
+# Copyright (C) 2018 Genesis Connect for Sensei LMS
+# This file is distributed under the same license as the Genesis Connect for Sensei LMS package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Genesis Connect for Sensei LMS 1.2.3\n"
@@ -12,25 +12,25 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: genesis-connect-for-woothemes-sensei.php:35
+#: genesis-connect-sensei-lms.php:35
 msgid "Sorry, you are not allowed to access this page directly."
 msgstr ""
 
 #. translators: Link to the Studiopress website.
-#: genesis-connect-for-woothemes-sensei.php:95
+#: genesis-connect-sensei-lms.php:95
 msgid ""
-"Sorry, you can't use the Genesis Connect for Woothemes Sensei Plugin unless "
+"Sorry, you can't use the Genesis Connect for Sensei LMS Plugin unless "
 "the <a href=\"%s\">Genesis Framework</a> is active. The plugin has been "
 "deactivated."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Genesis Connect for Woothemes Sensei"
+msgid "Genesis Connect for Sensei LMS"
 msgstr ""
 
-#. #-#-#-#-#  genesis-connect-for-woothemes-sensei.pot (Genesis Connect for Woothemes Sensei 1.2.0)  #-#-#-#-#
+#. #-#-#-#-#  genesis-connect-sensei-lms.pot (Genesis Connect for Sensei LMS 1.2.3)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  genesis-connect-for-woothemes-sensei.pot (Genesis Connect for Woothemes Sensei 1.2.0)  #-#-#-#-#
+#. #-#-#-#-#  genesis-connect-sensei-lms.pot (Genesis Connect for Sensei LMS 1.2.3)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "https://www.christophherr.com"
 msgstr ""

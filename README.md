@@ -1,4 +1,4 @@
-# Genesis Connect for Woothemes Sensei
+# Genesis Connect for Sensei LMS
 
 Contributors: christophherr
 Donate link: https://www.christophherr.com/donate/

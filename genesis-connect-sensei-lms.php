@@ -16,18 +16,18 @@
  * @version   1.2.3
  * @license   GPL-2.0+
  *
- * Genesis Connect for Woothemes Sensei is free software: you can redistribute it and/or modify
+ * Genesis Connect for Sensei LMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * any later version.
  *
- * Genesis Connect for Woothemes Sensei is distributed in the hope that it will be useful,
+ * Genesis Connect for Sensei LMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Genesis Connect for Woothemes Sensei. If not, see <http://www.gnu.org/licenses/>.
+ * along with Genesis Connect for Sensei LMS. If not, see <http://www.gnu.org/licenses/>.
  */
 namespace DeWittePrins\GenesisConnect\SenseiLMS;
 
@@ -125,7 +125,7 @@ function get_plugin_data( $key = false) {
  */
 function load_textdomain() {
 	
-	load_plugin_textdomain( 'genesis-connect-for-woothemes-sensei', false, namespace\PlUGIN_LANGUAGES_DIR );
+	load_plugin_textdomain( 'genesis-connect-sensei-lms', false, namespace\PlUGIN_LANGUAGES_DIR );
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\load_textdomain' );
 
@@ -179,7 +179,7 @@ function render_admin_notice() {
 
 	$error = sprintf(
 		// translators: Link to the Studiopress website.
-		__( 'Sorry, you can\'t use the Genesis Connect for Woothemes Sensei Plugin unless the <a href="%s">Genesis Framework</a> is active. The plugin has been deactivated.', 'genesis-connect-sensei-lms' ),
+		__( 'Sorry, you can\'t use the Genesis Connect for Sensei LMS Plugin unless the <a href="%s">Genesis Framework</a> is active. The plugin has been deactivated.', 'genesis-connect-sensei-lms' ),
 		'http://www.studiopress.com'
 	);
 
