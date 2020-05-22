@@ -2,12 +2,17 @@
 /**
  * These functions manage loading of templates for WooCommerce.
  *
- * @package Genesis_Connect_WooCommerce
- * @since 0.9.0
+ * @package     DeWittePrins\GenesisConnect\SenseiLMS
+ * @since       1.2.1
+ * @author      Hans Schuijff
+ * @link        https://github.com/hansschuijff/genesis-connect-sensei-lms
+ * @license     GNU General Public License 2.0+
  */
+namespace DeWittePrins\GenesisConnect\SenseiLMS;
 
+// Prevent direct access to this file
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	wp_die( _e( 'Sorry, you are not allowed to access this page directly.', 'genesis-connect-sensei-lms' ) );
 }
 
 /**
@@ -47,17 +52,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.2.1
  *
- * @param string $template Template file as per template hierarchy.
- *
+ * @param  string $template Template file as per template hierarchy.
+ * 
  * @return string $template Template file as per template hierarchy.
  */
-function gcfws_template_loader( $template ) {
+function template_loader( $template ) {
 
 	global $wp_query;
-
-	// if ( class_exists( 'WC_Embed' ) && WC_Embed::is_embedded_product() ) {
-	// 	return $template;
-	// }
 
 	$custom_template = '';
 	if ( is_singular( [ 'course', 'lesson', 'quiz', 'sensei_message' ] ) ) {
@@ -112,10 +113,11 @@ function gcfws_template_loader( $template ) {
 
 		// if not available: use the genesis connect plugin template
 		if ( ! $template ) {
-			$template = trailingslashit(GCFWS_TEMPLATE_DIR) . $custom_template;
+			$template = namespace\TEMPLATE_DIR . $custom_template;
 		}
-	}
-	return $template;
 
+	}
+
+	return $template;
 }
-add_filter( 'template_include', 'gcfws_template_loader', 20 );
+add_filter( 'template_include', __NAMESPACE__ . '\template_loader', 20 );

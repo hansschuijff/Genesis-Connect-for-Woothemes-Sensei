@@ -2,9 +2,8 @@
 # This file is distributed under the same license as the Genesis Connect for Woothemes Sensei package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Genesis Connect for Woothemes Sensei 1.2.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/genesis-connect-"
-"for-woothemes-sensei\n"
+"Project-Id-Version: Genesis Connect for Sensei LMS 1.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/hansschuijff/genesis-connect-sensei-lms\n"
 "POT-Creation-Date: 2018-04-03 01:10:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

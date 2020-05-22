@@ -4,8 +4,8 @@ Contributors: christophherr
 Donate link: https://www.christophherr.com/donate/
 Tags: automattic sensei, sensei, genesis, genesis connect, studiopress, woocommerce sensei
 Requires at least: 4.1
-Tested up to: 4.9
-Stable tag: 1.2.0
+Tested up to: 5.4.1
+Stable tag: 1.2.3
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -21,19 +21,11 @@ In other words, if you are not trying to integrate the Sensei plugin with the Ge
 
 This plugin will only work (i.e. activate) if the Genesis Framework and its child themes are activated.
 
-Version 1.1.0 forces a content-sidebar layout on course, lesson and question posts to avoid the sidebar showing underneath the main content.
-
-Version 1.2.0 adds the Genesis Layout options to course, lesson and question posts and archives and the module taxonomy allowing better control about the layout options. For backwards-compatibiliy, The single posts are still set to a content-sidebar layout but this setting can be overwritten by the Genesis Layout options.
-
-It should not be necessary to remove the formerly forced content-sidebar layout on single posts with
-
-* <code>remove_action( 'genesis_meta', 'gcfws_force_content_sidebar_layout_on_cpt_posts' );</code>
-
-in your functions.php anymore. Please use the Genesis Layout options instead.
+Version 1.2.0 adds the Genesis Layout options to course, lesson and question posts and archives and the module taxonomy allowing better control about the layout options.
 
 ## Installation
 
-1.  Upload the entire `Genesis-Connect-for-Woothemes-Sensei` folder to your `/wp-content/plugins` directory.
+1.  Upload the entire `genesis-connect-sensei-lms` folder to your `/wp-content/plugins` directory.
 2.  Activate the plugin through the 'Plugins' menu in WordPress.
 
 Alternatively, you can
@@ -51,11 +43,7 @@ No. This plugin only works with the Genesis Framework and its child themes.
 ### Does this work with any Genesis child theme?
 
 Yes and no. Technically, it does.
-However, depending on other factors such as the individual theme's styling and layout, the output may be unexpected, and require some tweaking.
-
-Case in point, if the full-width layout is selected in the Genesis settings, lessons, course and question posts are showing a sidebar underneath the main content.
-Version 1.1.0 forced a content-sidebar layout on single course, lesson and questions.
-Since Version 1.2.0 the Genesis Layout options can be used to alter the appearance.
+However, depending on other factors such as the individual theme's styling and layout, the output may be unexpected and require some tweaking.
 
 ### Are there any settings?
 
@@ -67,6 +55,20 @@ Since version 1.2.0, you can choose the layouts of your courses, lessons, questi
 There are no settings and no settings screen. You would have to change the code directly in the source.
 
 ## Changelog
+
+### 1.2.3
+
+* complete refactoring of the plugin
+* added: fix for standard sensei-lms pages that is_sensei() did not regognize
+* added: 'gcfws_custom_sensei_lms_pages' filter, so custom pages can be recognized by is_sensei() too.
+* added: now adds body class for sensei pages that were not specifically marked by Sensei LMS
+* added: a sortable module column to the lesson list in admin
+* added: module set to show in admins quick edit functionality in lessons and courses
+* removed: all functionality that forced genesis site layout. The plugin now just adds settings and leaves further customization to the theme.
+
+### 1.2.2
+
+* fixed: typo in constant for template path that broke the template loader
 
 ### 1.2.1
 
