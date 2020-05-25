@@ -161,7 +161,7 @@ function is_sensei_course_results_page() {
 function is_sensei_teacher_archive() {
 
 	if ( is_author() 
-		&& Sensei_Teacher::is_a_teacher( get_query_var( 'author' ) ) 
+		&& Sensei()->teacher->is_a_teacher( get_query_var( 'author' ) ) 
 		&& ! user_can( get_query_var( 'author' ), 'manage_options' ) ) {
 
 		return true;

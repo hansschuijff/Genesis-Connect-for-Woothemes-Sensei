@@ -13,7 +13,7 @@
  *
  * @package   DeWittePrins\GenesisConnect\SenseiLMS
  * @author    Hans Schuijff
- * @version   1.2.3
+ * @version   1.2.4
  * @license   GPL-2.0+
  *
  * Genesis Connect for Sensei LMS is free software: you can redistribute it and/or modify
