@@ -56,6 +56,10 @@ There are no settings and no settings screen. You would have to change the code 
 
 ## Changelog
 
+### 1.2.5
+
+* fixed: Template for single message wasn't loading.
+
 ### 1.2.4
 
 * fixed: Sensei_Teacher object not found because of namespacing. Use Sensei()->teacher instead.
