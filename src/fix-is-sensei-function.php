@@ -48,12 +48,12 @@ function add_missing_pages_to_is_sensei( $is_sensei ) {
 	}
 
 	/**
-	 * this filter allowsfor custom pages to be marked as being a sensei page
-	 * callbacks should return a valid parameter for the is_page() function
+	 * this filter allows for custom pages (id's) to be marked as being a sensei page
+	 * the filter should return one (string|int) or more (array) post_id's
 	 * 
 	 * @since 1.2.3
 	 */
-	$custom_sensei_lms_pages = apply_filters( 'gcfws_custom_sensei_lms_pages', "" );
+	$custom_sensei_lms_pages =  array_map( 'intval', (array) apply_filters( 'gcsensei_custom_sensei_lms_page_ids', "" ) );
 
 	if ( $custom_sensei_lms_pages && is_page( $custom_sensei_lms_pages )) {
 
