@@ -5,7 +5,7 @@
  * Description: Plugin to easily integrate the Sensei LMS plugin with the Genesis Framework. This plugin will only work with the Genesis Framework and its child themes. It is an enhanced and corrected version of the genesis connect plugin of Christoph Herr
  * Author:      Hans Schuijff
  * Author URI:  https://dewitteprins.nl
-* Version:     1.2.3
+ * Version:     1.2.5
  * Text Domain: genesis-connect-sensei-lms
  * Domain Path: /languages
  * License:     GPL-2.0+
@@ -13,7 +13,7 @@
  *
  * @package   DeWittePrins\GenesisConnect\SenseiLMS
  * @author    Hans Schuijff
- * @version   1.2.4
+ * @version   1.2.5
  * @license   GPL-2.0+
  *
  * Genesis Connect for Sensei LMS is free software: you can redistribute it and/or modify
