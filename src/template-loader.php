@@ -64,18 +64,23 @@ function template_loader( $template ) {
 	if ( is_singular( [ 'course', 'lesson', 'quiz', 'sensei_message' ] ) ) {
 
 		$post_type = get_post_type();
+		
 		if ( 'sensei_message' === $post_type ) {
 			$post_type = 'message';
 		}
-		$custom_template  = "single-{$post_type}.php";
-
+		if ( $post_type ) {
+			$custom_template  = "single-{$post_type}.php";
+		}
 	} elseif ( is_post_type_archive( [ 'course', 'lesson', 'sensei_message' ] ) ) {
 
 		$post_type = get_post_type();
+
 		if ( 'sensei_message' === $post_type ) {
 			$post_type = 'message';
 		}
-		$custom_template  = "archive-{$post_type}.php";
+		if ( $post_type ) {
+			$custom_template  = "archive-{$post_type}.php";
+		}
 
 	} elseif ( is_page( Sensei()->get_page_id( 'courses' ) ) || is_tax('course-category') ) {
 
