@@ -61,28 +61,43 @@ function template_loader( $template ) {
 	global $wp_query;
 
 	$custom_template = '';
-	if ( is_singular( [ 'course', 'lesson', 'quiz', 'sensei_message' ] ) ) {
+	$sensei_post_types = [ 'course', 'lesson', 'quiz', 'sensei_message' ];
+	
+	if ( is_singular( [ $sensei_post_types ] ) ) {
 
 		$post_type = get_post_type();
-		
-		if ( 'sensei_message' === $post_type ) {
-			$post_type = 'message';
-		}
-		if ( $post_type ) {
+
+		if ( in_array( $post_type, $sensei_post_types, true ) ) {
+
+			if ( 'sensei_message' === $post_type ) {
+				$post_type = 'message';
+			}
 			$custom_template  = "single-{$post_type}.php";
 		}
-	} elseif ( is_post_type_archive( [ 'course', 'lesson', 'sensei_message' ] ) ) {
+		
+	} elseif ( is_post_type_archive( $sensei_post_types ) ) {
 
 		$post_type = get_post_type();
 
-		if ( 'sensei_message' === $post_type ) {
-			$post_type = 'message';
-		}
-		if ( $post_type ) {
-			$custom_template  = "archive-{$post_type}.php";
-		}
+        if ( in_array($post_type, $sensei_post_types, true) ) {
+		 
+			if ('sensei_message' === $post_type) {
+                $post_type = 'message';
+			}
+            if ('quiz' !== $post_type) {
+                $custom_template  = "archive-{$post_type}.php";
+            }
+		}	
+		
+	} elseif ( is_tax( 'course-category' ) 
+		|| is_page( Sensei()->get_page_id( 'courses' ) ) ) {
 
-	} elseif ( is_page( Sensei()->get_page_id( 'courses' ) ) || is_tax('course-category') ) {
+		// note: 
+		// is_page( Sensei()->get_page_id( 'courses' ) 
+		// looks for the setting "sensei_courses_page_id"
+		// which is there for legacy
+		// WordPress recognizes the currently set courses page 
+		// as a course post_type archive.
 
 		$custom_template  = 'archive-course.php';
 

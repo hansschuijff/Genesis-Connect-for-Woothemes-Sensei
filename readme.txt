@@ -58,6 +58,10 @@ There are no settings and no settings screen. You would have to change the code 
 
 == Changelog ==
 
+= 1.2.7 =
+
+* fixed: make sure template-loader only tries to load existing custom templates based on post_type.
+
 = 1.2.6 =
 
 * renamed filter gcfws_custom_sensei_lms_pages to gcsensei_custom_sensei_lms_page_ids.
