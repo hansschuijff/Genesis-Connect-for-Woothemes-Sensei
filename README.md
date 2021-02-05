@@ -56,6 +56,14 @@ There are no settings and no settings screen. You would have to change the code 
 
 ## Changelog
 
+### 1.2.8
+
+* fixed: Makes sure plugin requirements are met before loading plugin files.
+* fixed: Begin upgrading templates to current version of sensei lms (in progress).
+* Added: Views for admin notices.
+* Added: Get plugin files from runtime config file.
+* Doc: Point to original template in templates doc blocks.
+
 ### 1.2.7
 
 * fixed: make sure template-loader only tries to load existing custom templates based on post_type.

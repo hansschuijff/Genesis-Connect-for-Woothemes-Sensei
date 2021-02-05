@@ -3,6 +3,8 @@
  * The Template for displaying teacher author archives, this template wil show the teacher
  * and all course that belong to to them.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\teacher-archive.php
+ * 
  * Override this template by copying it to your_theme/sensei/teacher-archive.php
  *
  * @author      Automattic

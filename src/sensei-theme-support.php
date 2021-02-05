@@ -1,9 +1,9 @@
 <?php
 /**
  * Add Sensei integration:
- * - declare sensei theme support
- * - replace sensei content wrappers
- * - use genesis sidebar
+ * - Declare sensei theme support
+ * - Replace sensei content wrappers by genesis wrappers
+ * - Use genesis sidebar
  *
  * @package     DeWittePrins\GenesisConnect\SenseiLMS
  * @since       1.2.2
@@ -34,7 +34,8 @@ function declare_sensei_theme_support() {
 add_action( 'after_setup_theme', __NAMESPACE__ . '\declare_sensei_theme_support' );
 
 /**
- * Remove the default Woothemes Sensei wrappers.
+ * Removes the default Woothemes Sensei wrappers.
+ * 
  * Checks which version of Woothemes Sensei is running
  * and removes the wrappers accordingly.
  *
@@ -59,28 +60,24 @@ function remove_default_sensei_content_wrappers() {
 add_action( 'genesis_meta', __NAMESPACE__ . '\remove_default_sensei_content_wrappers' );
 
 /**
- * Renders a Genesis-specific opening wrapper for Sensei
+ * Renders Genesis-specific opening wrappers for Sensei
  *
  * @since 1.0.0
  */
 function render_genesis_sensei_content_wrapper_open() {
-
 	echo '<div class="content-sidebar-wrap">';
-	echo '  <main class="content" role="main" itemprop="mainContentOfPage">';
-
+	echo '    <main class="content" role="main" itemprop="mainContentOfPage">';
 }
 add_action( 'sensei_before_main_content', __NAMESPACE__ . '\render_genesis_sensei_content_wrapper_open', 10 );
 
 /**
- * Renders a Genesis-specific closing wrapper for Sensei
+ * Renders Genesis-specific closing wrappers for Sensei LMS
  *
  * @since 1.0.0
  */
 function render_genesis_sensei_content_wrapper_close() {
-
-	echo '</main> <!-- end main-->';
+	echo '    </main> <!-- end main-->';
 	genesis_get_sidebar();
 	echo '</div> <!-- end .content-sidebar-wrap-->';
-
 }
 add_action( 'sensei_after_main_content', __NAMESPACE__ . '\render_genesis_sensei_content_wrapper_close', 10 );

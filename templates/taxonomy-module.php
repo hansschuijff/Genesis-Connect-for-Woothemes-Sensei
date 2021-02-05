@@ -2,6 +2,8 @@
 /**
  * The template for displaying a module.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\taxonomy-module.php
+ * 
  * Override this template by copying it to your_theme/sensei/taxonomy-module.php.
  *
  * @author    Automattic

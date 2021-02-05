@@ -3,6 +3,8 @@
  * The Template for displaying lesson archives, including the lesson page template.
  * This template also handels the lesson modules taxonomy and the lessons_tag taxonomy.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\archive-lesson.php
+ * 
  * Override this template by copying it to your_theme/sensei/archive-lesson.php
  *
  * @author      Automattic

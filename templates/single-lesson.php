@@ -2,6 +2,8 @@
 /**
  * The Template for displaying all single lessons.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\single-lesson.php
+ * 
  * Override this template by copying it to yourtheme/sensei/single-lesson.php
  *
  * @author      Automattic
@@ -9,6 +11,7 @@
  * @category    Templates
  * @version     1.12.2
  */
+namespace DeWittePrins\GenesisConnect\SenseiLMS;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -99,7 +102,14 @@ function dwp_sensei_do_single_lesson_loop() {
 	 */
 	do_action( 'sensei_pagination' );
 
+	/**
+	 * Fires inside the standard loop, after the entry closing markup.
+	 *
+	 * @since 2.0.0
+	 */
+	do_action( 'genesis_after_entry_lesson' );
+
 }
-add_action( 'genesis_loop', 'dwp_sensei_do_single_lesson_loop' );
+add_action( 'genesis_loop', __NAMESPACE__ . '\dwp_sensei_do_single_lesson_loop' );
 
 genesis();

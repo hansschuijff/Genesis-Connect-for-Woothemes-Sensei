@@ -5,7 +5,7 @@
  * Description: Plugin to easily integrate the Sensei LMS plugin with the Genesis Framework. This plugin will only work with the Genesis Framework and its child themes. It is an enhanced and corrected version of the genesis connect plugin of Christoph Herr
  * Author:      Hans Schuijff
  * Author URI:  https://dewitteprins.nl
- * Version:     1.2.7
+ * Version:     1.2.8
  * Text Domain: genesis-connect-sensei-lms
  * Domain Path: /languages
  * License:     GPL-2.0+
@@ -81,7 +81,12 @@ function get_plugin_data( $key = false) {
 		$plugin_data_store = \get_plugin_data( __FILE__, false, false );
 		
 		// Fully Qualified name of plugin's base directory
-		$plugin_data_store ['PluginDir'] = trailingslashit( __DIR__ );
+		$plugin_data_store ['PluginDir']        = trailingslashit( __DIR__ );
+		$plugin_data_store ['dir']              = trailingslashit( __DIR__ );
+		$plugin_data_store ['source-dir']       = $plugin_data_store ['dir'] . 'src/';
+		$plugin_data_store ['config-dir']       = $plugin_data_store ['dir'] . 'config/';
+		$plugin_data_store ['admin-source-dir'] = $plugin_data_store ['dir'] . 'admin/';
+		$plugin_data_store ['admin-views-dir']  = $plugin_data_store ['dir'] . 'admin/views/';
 
 		// Full URL to the plugin's base directory
 		$plugin_data_store ['PluginURL'] = plugin_dir_url( __FILE__ );
@@ -104,9 +109,7 @@ function get_plugin_data( $key = false) {
 	}
 
 	if ( $key ) {
-
 		if ( isset( $plugin_data_store[ $key ] ) ) {
-
 			return $plugin_data_store[ $key ];
 		}
 
@@ -117,99 +120,113 @@ function get_plugin_data( $key = false) {
 }
 
 /**
- * Load plugin textdomain.
+ * Are plugin requirements met?
  *
- * @since 1.0.1
- *
- * @return void
+ * @since 1.2.8
+ * @return boolean True when required plugins and themes are active, otherwises false;
  */
-function load_textdomain() {
-	
-	load_plugin_textdomain( 'genesis-connect-sensei-lms', false, namespace\PlUGIN_LANGUAGES_DIR );
-}
-add_action( 'plugins_loaded', __NAMESPACE__ . '\load_textdomain' );
-
-/**
- * This function runs on plugin activation. It checks to make sure the
- * Genesis Framework and Woothemes Sensei are active. If not, it deactivates the plugin.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function activation() {
-
-	if ( ! function_exists( 'genesis' ) ) {
-		
-		// Deactivate.
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-		add_action( 'admin_notices', __NAMESPACE__ . '\render_admin_notice' );
+function should_plugin_run() {
+	if ( is_genesis_loaded() && is_sensei_loaded() ) {
+		return true;
 	}
+	render_admin_notices();
+	return false;
 }
-register_activation_hook( __FILE__, __NAMESPACE__ . '\activation' );
 
 /**
- * This function is triggered when the WordPress theme is changed.
- * It checks if the Genesis Framework is active. If not, it deactivates the plugin.
+ * Render admin notices.
+ * 
+ * Render the proper admin notices 
+ * to inform users on any plugin requirments that are not met.
  *
- * @since 1.0.0
- *
+ * @since 1.2.8
  * @return void
  */
-function plugin_deactivate() {
-
-	if ( ! function_exists( 'genesis' ) ) {
-
-		// Deactivate.
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-		add_action( 'admin_notices', __NAMESPACE__ . '\render_admin_notice' );
+function render_admin_notices() {
+	if ( ! is_admin() ) {
+		return;
 	}
-}
-add_action( 'admin_init', __NAMESPACE__ . '\plugin_deactivate' );
-add_action( 'switch_theme', __NAMESPACE__ . '\plugin_deactivate' );
-
-/**
- * Error message if you're not using the Genesis Framework.
- *
- * @since 1.0.0
- *
- * @return void
- */
-function render_admin_notice() {
-
-	$error = sprintf(
-		// translators: Link to the Studiopress website.
-		__( 'Sorry, you can\'t use the Genesis Connect for Sensei LMS Plugin unless the <a href="%s">Genesis Framework</a> is active. The plugin has been deactivated.', 'genesis-connect-sensei-lms' ),
-		'http://www.studiopress.com'
-	);
-
-	printf( '<div class="error"><p>%s</p></div>', $error );
-
+	require_once get_plugin_data('admin-source-dir') . 'notices.php';
+	if ( ! is_genesis_loaded() ) {
+		add_action( 'admin_notices', __NAMESPACE__ . '\genesis_required_notice' );
+	}
+	if ( ! is_sensei_loaded() ) {
+		add_action( 'admin_notices', __NAMESPACE__ . '\sensei_required_notice' );
+	}
 	if ( isset( $_GET['activate'] ) ) {
 		unset( $_GET['activate'] );
 	}
 }
 
 /**
+ * Is Sensei LMS loaded?
+ * 
+ * Initiates an admin notice when Sensei LMS is not active.
+ *
+ * @since 1.2.8
+ * @return boolean True when Sensei LMS is active, otherwise false.
+ */
+function is_sensei_loaded() {
+	return function_exists( 'sensei' );
+}
+
+/**
+ * Is the Genesis Framework loaded?
+ * 
+ * Initiates an admin notice when Sensei LMS is not active.
+ *
+ * @since 1.2.8
+ * @return boolean True when Sensei LMS is active, otherwise false.
+ */
+function is_genesis_loaded() {
+	return function_exists( 'genesis' );
+}
+
+/**
+ * Load plugin textdomain.
+ *
+ * @since 1.0.1
+ * @return void
+ */
+function load_textdomain() {
+	load_plugin_textdomain( 'genesis-connect-sensei-lms', false, namespace\PlUGIN_LANGUAGES_DIR );
+}
+add_action( 'plugins_loaded', __NAMESPACE__ . '\load_textdomain' );
+
+/**
+ * Get runtime configuration files for a given contexts.
+ *
+ * @since 1.2.8
+ * @param string $context
+ * @return array The runtime configuration for the context.
+ */
+function get_config( string $context ) {
+	static $_config_store;
+	if ( ! isset( $_config_store[ $context ] ) ) {
+		$_config_store[ $context ] = require get_plugin_data( 'config-dir' ) . $context . '.php';
+	}
+	return $_config_store[ $context ];
+}
+
+/**
  * Load the plugin files.
+ * 
+ * Check if plugin requirements are met and load plugin files.
  *
  * @since 1.2.0
- *
  * @return void
  */
 function autoloader() {
-
-	$plugin_files = [
-		'sensei-lms-integration',
-		'template-loader',
-		'add-genesis-layout-settings',
-		'fix-is-sensei-function',
-		'add-course-module-to-lesson-admin'
-	];
-
+	if ( ! should_plugin_run() ) {
+		return;
+	}
+	$plugin_files = get_config( 'autoload' );
 	foreach ( $plugin_files as $file ) {
-
-		require namespace\PLUGIN_DIR . 'src/' . $file . '.php'; 
+		require_once namespace\PLUGIN_DIR . 'src/' . $file . '.php'; 
 	}
 }
-autoloader();
+/**
+ * Plugin is loaded a this hook, because genesis 
+ * and sensei lms need to be loaded already for it to function.
+ */
+add_action( 'after_setup_theme', __NAMESPACE__ . '\autoloader' );

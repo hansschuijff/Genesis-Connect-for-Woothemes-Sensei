@@ -2,6 +2,8 @@
 /**
  * The Template for displaying all single courses.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\single-course.php
+ * 
  * Override this template by copying it to yourtheme/sensei/single-course.php
  *
  * @author      Automattic

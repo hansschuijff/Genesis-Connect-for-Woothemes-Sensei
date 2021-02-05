@@ -61,14 +61,13 @@ function template_loader( $template ) {
 	global $wp_query;
 
 	$custom_template = '';
-	$sensei_post_types = [ 'course', 'lesson', 'quiz', 'sensei_message' ];
-	
-	if ( is_singular( [ $sensei_post_types ] ) ) {
+	$sensei_post_types = array( 'course', 'lesson', 'quiz', 'sensei_message' );
+
+	if ( \is_singular( $sensei_post_types ) ) {
 
 		$post_type = get_post_type();
 
 		if ( in_array( $post_type, $sensei_post_types, true ) ) {
-
 			if ( 'sensei_message' === $post_type ) {
 				$post_type = 'message';
 			}
@@ -130,7 +129,6 @@ function template_loader( $template ) {
 	}
 
 	if ( $custom_template ) {
-
 		// prefer a custom template in the theme
 		$template = locate_template( array( 'sensei/' . $custom_template ) );
 

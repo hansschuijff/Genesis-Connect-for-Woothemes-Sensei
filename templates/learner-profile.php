@@ -2,6 +2,8 @@
 /**
  * The Template for displaying course archives, including the course page template.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\learner-profile.php
+ * 
  * Override this template by copying it to yourtheme/sensei/archive-course.php
  *
  * @author      Automattic

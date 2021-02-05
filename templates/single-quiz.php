@@ -2,6 +2,8 @@
 /**
  * The Template for displaying all Quiz Questions.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\single-quiz.php
+ * 
  * Override this template by copying it to yourtheme/sensei/single-quiz.php
  *
  * @author      Automattic
@@ -155,7 +157,41 @@ function dwp_sensei_do_single_quiz_loop() {
 	 */
 	do_action( 'sensei_pagination' );
 
+	/**
+	 * Fires inside the standard loop, after the entry closing markup.
+	 *
+	 * @since 2.0.0
+	 */
+	do_action( 'genesis_after_entry_quiz' );
+
 }
 add_action( 'genesis_loop', 'dwp_sensei_do_single_quiz_loop' );
+
+add_action( 'genesis_after_entry', 'dwp_sensei_after_entry_widget_area' );
+/**
+ * Display after-entry widget area on the genesis_after_entry action hook.
+ *
+ * @since 2.1.0
+ *
+ * @return void Return early if not singular, or post type does not support after entry widget area.
+ */
+function dwp_sensei_after_entry_widget_area() {
+
+	if ( ! is_singular( 'quiz' ) 
+	// || ! post_type_supports( get_post_type(), 'genesis-after-entry-widget-area' ) 
+	) {
+		return;
+	}
+
+	genesis_widget_area(
+		'after-entry-quiz',
+		[
+			'before' => '<div class="after-entry after-entry-quiz widget-area">',
+			'after'  => '</div>',
+		]
+	);
+}
+
+
 
 genesis();

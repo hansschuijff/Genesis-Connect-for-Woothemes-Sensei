@@ -1,6 +1,9 @@
 <?php
 /**
- * temporary fix for Sensei lms issue #3193
+ * Makes sure all sensei lms pages have appropriate sensei body-classes. 
+ * 
+ * Fix for Sensei lms issue #3193,
+ * plus it allows for custom pages to be marked too.
  * 
  * The is_sensei() function doesn't take all sensei pages in account
  * This function makes sure it recognizes all files that use sensei-templates:
@@ -41,32 +44,25 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function add_missing_pages_to_is_sensei( $is_sensei ) {
-
-	// bail out early
+	// bail out early when already true
 	if ( $is_sensei ) {
 		return true;
 	}
-
 	/**
 	 * this filter allows for custom pages (id's) to be marked as being a sensei page
 	 * the filter should return one (string|int) or more (array) post_id's
 	 * 
 	 * @since 1.2.3
 	 */
-	$custom_sensei_lms_pages =  array_map( 'intval', (array) apply_filters( 'gcsensei_custom_sensei_lms_page_ids', "" ) );
+	$custom_sensei_lms_page_ids =  array_map( 'intval', (array) apply_filters( 'gcsensei_custom_sensei_lms_page_ids', "" ) );
 
-	if ( $custom_sensei_lms_pages && is_page( $custom_sensei_lms_pages )) {
-
+	if ( $custom_sensei_lms_page_ids && is_page( $custom_sensei_lms_page_ids )) {
 		return true;
 	}
-
 	if ( is_sensei_learner_profile() ) {
-
 		return true;
 	}
-
 	if ( is_sensei_course_results_page() ) {
-
 		return true;
 	}
 
@@ -75,36 +71,33 @@ function add_missing_pages_to_is_sensei( $is_sensei ) {
 }
 add_filter( 'is_sensei', __NAMESPACE__ . '\add_missing_pages_to_is_sensei' );
 
-
 /**
- * Add body classes to sensei LMS pages the plugin only marks with the class sensei
+ * Adds a custom body class to custom sensei LMS pages 
  * 
- * - mark the My courses page with body class "my-sensei-courses-page"
+ * - marks the My courses page (set in the settings) with body class "my-sensei-courses"
  * 
  * - pages passed by filter 'gcfws_custom_sensei_lms_pages' 
- *   are marked with body class "custom-sensei-courses-page"
+ *   are marked with body class "sensei-courses-custom-page"
  * 
- *   this is meanth for pages that are build with the sensei_courses shortcode.
+ *   this is meant for pages that are build with the sensei_courses shortcode.
  *   Since they are also added to the is_sensei() selection, they will also have the "sensei" body class.
  *
  * - the courses page set in the settings page of sensei lms is marked as an course-archive 
  *   and is not accessible as a page. Sensei LMS just uses that page for the slug.
  *
- * - all other sensei pages already have recognizable individual body classes 
+ * - all other sensei pages already have recognizable individual body classes
  * 
  * @since 1.2.3
- * @param bool $is_sensei the result of the is_sensei function
- * @return bool
+ * 
+ * @param str[] $body_classes 
+ * @return str[] $body_classes
  * 
  */
-function add_custom_body_class_to_sensei_pages( $classes ) {
+function add_custom_body_class_to_sensei_pages( $body_classes ) {
 
 	if ( is_page( Sensei()->settings->settings['my_course_page'] ) ) {
-
-		$classes[] = 'my-sensei-courses';
-
+		$body_classes[] = 'my-sensei-courses';
 	} else {
-	
 		/**
 		 * this filter allows for custom pages to be marked as being a sensei page
 		 * callbacks should return a valid parameter for the is_page() function
@@ -113,20 +106,17 @@ function add_custom_body_class_to_sensei_pages( $classes ) {
 		 */
 		$custom_sensei_lms_pages = apply_filters( 'gcfws_custom_sensei_lms_pages', "" );
 
-		if ( $custom_sensei_lms_pages && is_page( $custom_sensei_lms_pages )) {
-
-			$classes[] = 'sensei-courses-custom-page';
+		if ( $custom_sensei_lms_pages 
+		&& is_page( $custom_sensei_lms_pages )) {
+			$body_classes[] = 'sensei-courses-custom-page';
 		}
 	}
-
-
-	return $classes;
+	return $body_classes;
 }
 add_action( 'body_class', __NAMESPACE__ . '\add_custom_body_class_to_sensei_pages' );
 
-
 /**
- * checks if the current page is a sensei learner profile page
+ * Is the current page a sensei learner profile page
  * 
  * @since 1.2.3
  * 
@@ -139,7 +129,7 @@ function is_sensei_learner_profile() {
 }
 
 /**
- * checks if the current page is a sensei course results page
+ * Is the current page a sensei course results page?
  * 
  * @since 1.2.3
  * 
@@ -152,7 +142,7 @@ function is_sensei_course_results_page() {
 }
 
 /**
- * checks if the current page is sensei teacher archive
+ * Is the current page a sensei teacher archive?
  * 
  * @since 1.2.3
  * 
@@ -161,8 +151,8 @@ function is_sensei_course_results_page() {
 function is_sensei_teacher_archive() {
 
 	if ( is_author() 
-		&& Sensei()->teacher->is_a_teacher( get_query_var( 'author' ) ) 
-		&& ! user_can( get_query_var( 'author' ), 'manage_options' ) ) {
+	&& Sensei()->teacher->is_a_teacher( get_query_var( 'author' ) ) 
+	&& ! user_can( get_query_var( 'author' ), 'manage_options' ) ) {
 
 		return true;
 	}

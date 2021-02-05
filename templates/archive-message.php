@@ -2,6 +2,8 @@
 /**
  * The Template for displaying message archives.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\archive-message.php
+ *
  * Override this template by copying it to yourtheme/sensei/archive-message.php
  *
  * @author      Automattic

@@ -2,6 +2,8 @@
 /**
  * The Template for displaying course archives, including the course page template.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\archive-course.php 
+ * 
  * Override this template by copying it to your_theme/sensei/archive-course.php
  *
  * @author      Automattic
@@ -15,11 +17,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 remove_action( 'genesis_loop', 'genesis_do_loop' );
+// add_filter( 'sensei_show_main_header', __return_false, 11 );
+// add_filter( 'sensei_show_main_footer', __return_false, 11 );
+add_action( 'genesis_loop', 'dwp_sensei_do_course_loop' );
 
+/**
+ * The genesis loop for a sensei course archive. 
+ *
+ * Basically this function contains the sensei archive-course template.
+ * 
+ * Customizations:
+ * 1. get_sensei_header() is removed, since that calls get_header() too.
+ * 2. get_sensei_footer() is removed, since that calls get_footer() too.
+ * 3. The still relevant code from the above functions has been inserted in the template.
+ * 
+ * @return void
+ */
 function dwp_sensei_do_course_loop() {
 
 	/**
-	 * This action before course archive loop. This hook fires within the archive-course.php
+	 * This action before course archive loop. 
+	 * This hook fires within the archive-course.php
 	 * It fires even if the current archive has no posts.
 	 *
 	 * @since 1.9.0
@@ -33,7 +51,7 @@ function dwp_sensei_do_course_loop() {
 
 	if ( have_posts() ) : 
 
-	sensei_load_template( 'loop-course.php' );
+		sensei_load_template( 'loop-course.php' );
 
 	else : ?>
 
@@ -57,6 +75,5 @@ function dwp_sensei_do_course_loop() {
 	do_action( 'sensei_pagination' );
 
 }
-add_action( 'genesis_loop', 'dwp_sensei_do_course_loop' );
 
 genesis();

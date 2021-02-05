@@ -2,6 +2,8 @@
 /**
  * The Template for displaying all single messages.
  *
+ * This is a genesis compatible version of: sensei-lms\templates\single-message.php
+ * 
  * Override this template by copying it to yourtheme/sensei/single-message.php
  *
  * @author      Automattic
